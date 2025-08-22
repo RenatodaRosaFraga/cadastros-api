@@ -1,7 +1,9 @@
 package br.com.senac.api.service;
 
+import br.com.senac.api.dto.ProdutoRequestDTO;
 import br.com.senac.api.model.Produto;
 import br.com.senac.api.repository.ProdutoRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -9,17 +11,34 @@ import java.util.List;
 @Service
 public class ProdutoService {
 
-    private final ProdutoRepository repository;
+    @Autowired
+    private ProdutoRepository produtoRepository;
 
-    public ProdutoService(ProdutoRepository repository) {
-        this.repository = repository;
+
+    public List<Produto> listarTodos() {
+        return produtoRepository.findAll();
     }
 
-    public List<Produto> findAll() {
-        return repository.findAll();
+    public Produto criar (ProdutoRequestDTO produto) {
+        Produto produtoPersist = new Produto();
+        produtoPersist.setNome(produto.getNome());
+        produtoPersist.setDescricao(produto.getDescricao());
+
+        return produtoRepository.save(produtoPersist);
+
     }
 
-    public Produto save(Produto produto) {
-        return repository.save(produto);
+    public Produto atualizar(Long id, ProdutoRequestDTO produto) throws Exception {
+        if (produtoRepository.existsById(id) == false) {
+            throw new Exception("Registro não encontrado");
+        }
+
+        Produto produtoPersist = new Produto();
+        produtoPersist.setNome(produto.getNome());
+        produtoPersist.setDescricao(produto.getDescricao());
+        produtoPersist.setId(id);
+
+        return produtoRepository.save(produtoPersist);
     }
+
 }

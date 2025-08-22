@@ -9,7 +9,10 @@ public class Pessoa {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(length = 50)
     private String nome;
+
+    @Column
     private String sobrenome;
 
     // Getters e Setters

@@ -9,7 +9,10 @@ public class Carro {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column
     private String marca;
+
+    @Column
     private String modelo;
 
     // Getters e Setters
