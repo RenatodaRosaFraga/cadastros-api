@@ -33,7 +33,7 @@ public class ProdutoController {
         }
     }
 
-    @PostMapping("/Atualizar/{id}")
+    @PutMapping("/Atualizar/{id}")
     public ResponseEntity<Produto> atualizar (@PathVariable Long id, @RequestBody ProdutoRequestDTO produto) {
 
         try {

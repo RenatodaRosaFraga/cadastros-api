@@ -32,7 +32,7 @@ public class PessoaController {
         }
     }
 
-    @PostMapping("/Atualizar/{id}")
+    @PutMapping("/Atualizar/{id}")
     public ResponseEntity<Pessoa> atualizar (@PathVariable Long id, @RequestBody PessoaRequestDTO pessoa) {
 
         try {
