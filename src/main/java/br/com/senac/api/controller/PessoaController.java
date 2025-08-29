@@ -33,13 +33,24 @@ public class PessoaController {
     }
 
     @PutMapping("/Atualizar/{id}")
-    public ResponseEntity<Pessoa> atualizar (@PathVariable Long id, @RequestBody PessoaRequestDTO pessoa) {
+    public ResponseEntity<Pessoa> atualizar (
+            @PathVariable Long id,
+            @RequestBody PessoaRequestDTO pessoa) {
 
         try {
             return ResponseEntity.ok(pessoaService.atualizar(id, pessoa));
         } catch (Exception e) {
             return ResponseEntity.badRequest().body(null);
         }
+    }
 
+    @DeleteMapping("/Deletar/{id}")
+    public ResponseEntity<Void> deletar (@PathVariable Long id) {
+        try {
+            pessoaService.deletar(id);
+            return ResponseEntity.ok(null);
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().body(null);
+        }
     }
 }

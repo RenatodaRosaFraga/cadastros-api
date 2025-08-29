@@ -41,4 +41,21 @@ public class ProdutoService {
         return produtoRepository.save(produtoPersist);
     }
 
+    public void deletar(Long id) {
+        if (!produtoRepository.existsById(id)){
+            throw new RuntimeException("Registro não encontrado");
+        }
+
+        produtoRepository.deleteById(id);
+
+    }
+
+    private Produto produtoRequestDTOParaProduto(ProdutoRequestDTO in){
+        Produto out = new Produto();
+        out.setDescricao(in.getNome());
+        out.setNome(in.getNome());
+
+        return out;
+    }
+
 }

@@ -42,6 +42,15 @@ public class PessoaService {
 
     }
 
+    public void deletar(Long id) {
+        if (!pessoaRepository.existsById(id)){
+            throw new RuntimeException("Registro não encontrado");
+        }
+
+        pessoaRepository.deleteById(id);
+
+    }
+
     private Pessoa pessoaRequestDTOParaPessoa(PessoaRequestDTO in){
         Pessoa out = new Pessoa();
         out.setNome(in.getNome());

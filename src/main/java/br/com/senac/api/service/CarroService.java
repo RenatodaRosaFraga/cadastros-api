@@ -39,4 +39,22 @@ public class CarroService {
         return carroRepository.save(carroPersist);
 
     }
+
+    public void deletar(Long id) {
+        if (!carroRepository.existsById(id)) {
+            throw new RuntimeException("Registro não encontrado");
+        }
+
+        carroRepository.deleteById(id);
+    }
+
+    private Carro carroRequestDTOParaCarro(CarroRequestDTO in){
+        Carro out = new Carro();
+        out.setMarca(in.getMarca());
+        out.setModelo(in.getModelo());
+
+        return out;
+
+    }
+
 }
